@@ -1,0 +1,1 @@
+export const { CLIENT_ID = '', CLIENT_SECRET = '', NEXT_PUBLIC_CLIENT_ID = '', NEXT_PUBLIC_CLIENT_SECRET = '', API_URL, NEXT_PUBLIC_API_URL } = process.env;  

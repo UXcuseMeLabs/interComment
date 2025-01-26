@@ -11,6 +11,9 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        stroke: '#9BAD53',
+        paragraph: '#5D6732',
+        greenseph: "#338E1D",
       },
     },
   },
