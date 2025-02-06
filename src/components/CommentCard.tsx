@@ -3,9 +3,11 @@
 import { useUser } from '@/context/userProvider';
 import { createUser, getUserByTwitchId, upVote } from '@/core/comment/service/commentService';
 import { Comment, Vote } from '@/core/comment/type'
+import { formatDate } from '@/utils/formatCommentDate';
 import { ThumbsUp } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import React from 'react'
+import { toast } from 'sonner';
 
 interface CommentCardProps {
     comment: Comment;
@@ -17,10 +19,15 @@ export default function CommentCard({comment}: CommentCardProps) {
     const likeVotes = comment.votes?.filter(vote => vote.value === true).length;
 
     const handleUpVote = async () => {
-        let userdb = await getUserByTwitchId(user?.id ?? '');
-        if (!userdb){
-            userdb = await createUser(user?.id ?? '');
+        if (!user?.id){
+            toast.error('Necesitas ingresar con twitch')
+            return;
         }
+
+        let userdb = await getUserByTwitchId(user?.id ?? '');
+
+        if (!userdb)userdb = await createUser(user?.id ?? '');
+
         const vote: Vote = {
             comment_id: comment.id ?? '',
             user_id: userdb.id,
@@ -28,6 +35,7 @@ export default function CommentCard({comment}: CommentCardProps) {
         }
         await upVote(vote);
         router.refresh();
+        toast.success('🥵🥵🥵🥵🥵🥵🥵')
     };
 
   return (
@@ -42,6 +50,7 @@ export default function CommentCard({comment}: CommentCardProps) {
             </div>
         <p className='self-end'>{comment.username}</p>
         </div>
+        <p className='self-end'>{formatDate(comment.createdAt)}</p>
     </article>
   )
 }

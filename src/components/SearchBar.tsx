@@ -2,7 +2,9 @@
 import { useUser } from '@/context/userProvider';
 import { createComment, createUser, getUserByTwitchId } from '@/core/comment/service/commentService';
 import { Comment } from '@/core/comment/type';
-import React, { useActionState, useEffect } from 'react'
+import { useRouter } from 'next/navigation';
+import React, { useActionState, useEffect, useRef } from 'react'
+import { toast } from 'sonner';
 
 interface CommentFormState {
   comment: string;
@@ -13,11 +15,7 @@ const handleSubmit = async (
   previousState: CommentFormState | undefined,
   formData: FormData
 ): Promise<CommentFormState> => {
-  // The previousState variable contains the last saved form state
-  console.log('previous saved state ', previousState);
-  // Use get to extract a value from a FormData object
   const comment = formData.get('comment') as string;
-  // The returned value will become our new formState
   return { comment };
 };
 
@@ -27,12 +25,19 @@ export function SearchBar() {
     comment: '',
   });
   const {user} = useUser();
+  const router = useRouter()
+  const isFirstRender = useRef(true);
   useEffect(() => {
    const init = async () => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false; // Marcar como inicializado después del primer render
+      return;
+    }
     const comment: Comment = {
       comment: state.comment,
       user_id: user?.id ?? '',
       username: user?.displayName ?? '',
+      createdAt: new Date().toDateString()
     };
 
     if (state.comment.length > 0 && user?.id) {
@@ -41,8 +46,10 @@ export function SearchBar() {
         user = await createUser(comment.user_id);
       }
       comment.user_id = user.id;
-      const newComment = createComment(comment);
-      console.log(newComment);
+      await createComment(comment);
+      router.refresh()
+    } else {
+      toast.error('Necesitas ingresar con tu cuenta de twitch para comentar')
     }
    }
     init();
