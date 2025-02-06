@@ -44,6 +44,14 @@ export const getComments = async () => {
     return comments;
 }
 
+export const deleteComments = async () => {
+   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/interComment`, { cache: 'no-store', method: 'DELETE' });
+   if (!response.ok) throw new Error('Error delete all comments')
+    const deletedComments = await response.json();
+   return deletedComments
+   
+}
+
 export const upVote = async (vote: Vote) => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/vote`, {
         method: 'POST',

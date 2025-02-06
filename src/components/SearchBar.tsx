@@ -55,13 +55,22 @@ export function SearchBar() {
     init();
   }, [state.comment]);
 
+  // TODO: Implementar bien la logica para eliminar comentarios por un usuario administrador o similar
+  // const handleDeleteaAllComments = async () => {
+  //    await deleteComments()
+  //    router.refresh();
+  // }
+
   return (
-    <form action={formAction} className='w-full flex'>
+      <>
+      {/* <button onClick={() => handleDeleteaAllComments()}>Eliminar los comentarios</button> */}
+          <form action={formAction} className='w-full flex'>
         <input
         name='comment'
         className='h-16 p-4 py-2 border flex-1 border-stroke text-paragraph/60 rounded-md'
         type="text" placeholder="Escribe tu idea... max 50 caracteres" />
         <input type='submit' className='px-4 py-2 text-white bg-paragraph/60'/>
     </form>
+      </>
   )
 }

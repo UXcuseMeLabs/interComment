@@ -1,4 +1,4 @@
-import CommentCard from "@/components/CommentCard";
+import {CommentCard} from "@/components/CommentCard";
 import { SearchBar } from "@/components/SearchBar"
 import SwitchEnableComments from "@/components/SwitchEnableComments";
 import { getComments } from "@/core/comment/service/commentService";
