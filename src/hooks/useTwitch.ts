@@ -93,7 +93,7 @@ export const useTwitch = ({ code }: IUserTwitch) => {
         };
 
         authenticate();
-    }, [code]);
+    }, [code, CLIENT_ID, CLIENT_SECRET, authRefreshFn, handleUser, router]);
 
     return {
         loginTwitchUrl,
