@@ -93,7 +93,8 @@ export const useTwitch = ({ code }: IUserTwitch) => {
         };
 
         authenticate();
-    }, [code, CLIENT_ID, CLIENT_SECRET, authRefreshFn, handleUser, router]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [code]);
 
     return {
         loginTwitchUrl,
