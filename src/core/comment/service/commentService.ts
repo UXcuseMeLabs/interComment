@@ -38,7 +38,7 @@ export const createUser = async (twitchId: string) => {
 }
 
 export const getComments = async () => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/interComment`);
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/interComment`, { next: { revalidate: 10 } });
     if (!response.ok) throw new Error('Error fetching comments');
     const comments = await response.json();
     return comments;
