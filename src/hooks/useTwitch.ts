@@ -27,7 +27,7 @@ export const useTwitch = ({ code }: IUserTwitch) => {
 
     const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID ?? "";
     const CLIENT_SECRET = process.env.NEXT_PUBLIC_CLIENT_SECRET ?? "";
-    const redirectUri = "https://localhost:3000";
+    const redirectUri = "https://inter-comment.vercel.app";
 
     const loginTwitchUrl = `https://id.twitch.tv/oauth2/authorize?client_id=${CLIENT_ID}&response_type=code&redirect_uri=${redirectUri}`;
 
