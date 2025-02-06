@@ -38,7 +38,7 @@ export const createUser = async (twitchId: string) => {
 }
 
 export const getComments = async () => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/interComment`, { next: { revalidate: 10 } });
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/interComment`, { cache: 'no-store' });
     if (!response.ok) throw new Error('Error fetching comments');
     const comments = await response.json();
     return comments;
@@ -50,7 +50,8 @@ export const upVote = async (vote: Vote) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(vote)
+        body: JSON.stringify(vote),
+        cache: 'no-store'
 
     });
     if (!response.ok) throw new Error('Error upvoting comment');
