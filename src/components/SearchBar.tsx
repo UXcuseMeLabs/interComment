@@ -19,8 +19,12 @@ const handleSubmit = async (
   return { comment };
 };
 
+interface SearchBarProps {
+  board_id: string;
+}
 
-export function SearchBar() {
+
+export function   SearchBar({board_id}: SearchBarProps) {
   const [state, formAction] = useActionState(handleSubmit, {
     comment: '',
   });
@@ -37,7 +41,8 @@ export function SearchBar() {
       comment: state.comment,
       user_id: user?.id ?? '',
       username: user?.displayName ?? '',
-      createdAt: new Date().toDateString()
+      createdAt: new Date().toDateString(),
+      board_id: board_id
     };
 
     if (state.comment.length > 0 && user?.id) {
@@ -64,12 +69,12 @@ export function SearchBar() {
   return (
       <>
       {/* <button onClick={() => handleDeleteaAllComments()}>Eliminar los comentarios</button> */}
-          <form action={formAction} className='w-full flex'>
+          <form action={formAction} className='w-full flex relative'>
         <input
         name='comment'
-        className='h-16 p-4 py-2 border flex-1 border-stroke text-paragraph/60 rounded-md'
+        className='h-16 p-4 py-2 border-b bg-transparent flex-1 border-paragraph/60 text-xl text-paragraph/60 rounded-md'
         type="text" placeholder="Escribe tu idea... max 50 caracteres" />
-        <input type='submit' className='px-4 py-2 text-white bg-paragraph/60'/>
+        <span className='absolute right-3 top-1/3'>Filtrar por</span>
     </form>
       </>
   )

@@ -17,6 +17,7 @@ export const createComment = async (comment: Comment) => {
 }
 
 export const  getUserByTwitchId = async (twitchId: string) => {
+    console.log(`${process.env.NEXT_PUBLIC_API_URL}/user/${twitchId}`);
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/${twitchId}`);
     if (!response.ok) throw new Error('Error fetching user birthday');
     const user = await response.json();
@@ -39,8 +40,9 @@ export const createUser = async (twitchId: string) => {
 
 export const getComments = async () => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/interComment`, { cache: 'no-store' });
+    console.log(response.status);
     if (!response.ok) throw new Error('Error fetching comments');
-    const comments = await response.json();
+    const comments: Comment[]  = await response.json();
     return comments;
 }
 

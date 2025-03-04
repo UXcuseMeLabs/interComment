@@ -1,21 +1,15 @@
-import {CommentCard} from "@/components/CommentCard";
-import { SearchBar } from "@/components/SearchBar"
-import SwitchEnableComments from "@/components/SwitchEnableComments";
-import { getComments } from "@/core/comment/service/commentService";
-import { Comment } from "@/core/comment/type";
+import localFont from "next/font/local";
+
+const cabinet = localFont({
+  src: '../../public/fonts/CabinetGrotesk-Variable.woff2',
+})
 
 export default async function Home() {
-  const comments = await getComments();
+
 
   return (
-    <main className="p-4 mt-20 max-w-screen-xl mx-auto">
-      <SwitchEnableComments/>
-      <SearchBar />
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
-        {comments.map((comment: Comment) => (
-          <CommentCard key={comment.id} comment={comment} />
-        ))}
-      </section>
+    <main className="max-w-screen-md mx-auto">
+      <h1 className={`text-5xl font-black ${cabinet.className} mb-10`}>Tablero para ideas de <span className="text-purple-700">uwu</span></h1>
     </main>
   );
 }

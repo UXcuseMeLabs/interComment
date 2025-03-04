@@ -6,6 +6,7 @@ export interface Comment {
     user_id: string;
     username: string;
     votes?: Vote[];
+    board_id: string;
     createdAt: string
 }
 
