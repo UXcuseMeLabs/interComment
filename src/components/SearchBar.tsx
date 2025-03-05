@@ -54,7 +54,7 @@ export function   SearchBar({board_id}: SearchBarProps) {
     if (state.comment.length > 0 && user?.id) {
       let user = await getUserByTwitchId(comment.user_id);
       if (!user) {
-        user = await createUser(comment.user_id);
+        user = await createUser(comment.user_id, user.displayName);
       }
       comment.user_id = user.id;
       await createComment(comment);
