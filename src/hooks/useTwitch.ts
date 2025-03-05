@@ -86,6 +86,7 @@ export const useTwitch = ({ code }: IUserTwitch) => {
                     await createUser(userId, user!.displayName);
                     setIsLoggedIn(true);
                     router.replace('/')
+                    router.refresh()
                 }   
             } catch (err) {
                 setError(err as Error);
