@@ -37,7 +37,7 @@ export const  CommentCard = memo(function Card({ comment, isEven, theme }: Comme
             }
         
             let userdb = await getUserByTwitchId(user.id);
-            if (!userdb) userdb = await createUser(user.id);
+            if (!userdb) userdb = await createUser(user.id, user.displayName);
         
         
             const vote: Vote = {

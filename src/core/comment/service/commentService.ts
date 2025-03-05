@@ -24,13 +24,13 @@ export const  getUserByTwitchId = async (twitchId: string) => {
     return user;
 }
 
-export const createUser = async (twitchId: string) => {
+export const createUser = async (twitchId: string, display_name: string) => {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ twitch_id: twitchId })
+        body: JSON.stringify({ twitch_id: twitchId, display_name })
     });
     console.log(JSON.stringify(response));
     if (!response.ok) throw new Error('Error creating user');

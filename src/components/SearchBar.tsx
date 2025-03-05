@@ -5,6 +5,12 @@ import { Comment } from '@/core/comment/type';
 import { useRouter } from 'next/navigation';
 import React, { useActionState, useEffect, useRef } from 'react'
 import { toast } from 'sonner';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover"
+import { Filter } from 'lucide-react';
 
 interface CommentFormState {
   comment: string;
@@ -74,7 +80,10 @@ export function   SearchBar({board_id}: SearchBarProps) {
         name='comment'
         className='h-16 p-4 py-2 border-b bg-transparent flex-1 border-paragraph/60 text-xl text-paragraph/60 rounded-md'
         type="text" placeholder="Escribe tu idea... max 50 caracteres" />
-        <span className='absolute right-3 top-1/3'>Filtrar por</span>
+        <Popover>
+          <PopoverTrigger className='absolute right-3 top-1/3 font-bold text-sm flex items-center gap-2'>Filtrar por <Filter size={20}/></PopoverTrigger>
+            <PopoverContent>Place content for the popover here.</PopoverContent>
+          </Popover>
     </form>
       </>
   )

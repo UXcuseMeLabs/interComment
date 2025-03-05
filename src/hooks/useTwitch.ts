@@ -5,6 +5,7 @@ import { ApiClient } from "@twurple/api";
 import Cookies from "universal-cookie";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/context/userProvider";
+import { createUser } from "@/core/comment/service/commentService";
 
 interface IUserTwitch {
     code?: string;
@@ -80,7 +81,9 @@ export const useTwitch = ({ code }: IUserTwitch) => {
 
                     const user = await apiClient.users.getUserById(userId);
                     cookies.set("interComments", JSON.stringify({ userId, accessToken: tokenData }), { path: "/" });
+                    
                     handleUser(user);
+                    await createUser(userId, user!.displayName);
                     setIsLoggedIn(true);
                     router.replace('/')
                 }   

@@ -10,7 +10,7 @@ export const getBoardByTwichId = async (id: string) => {
 }
 
 export const createBoard = async (board: BoardInput) => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/board`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL ?? process.env.API_URL}/board`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
