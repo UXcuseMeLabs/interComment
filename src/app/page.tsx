@@ -20,7 +20,6 @@ export default function Home() {
 
   const handleCreateBoard = async () => {
     try {
-      console.log('userid', user?.id);
       const userBD = await getUserByTwitchId(user?.id ?? '');
       await createBoard({
       name : 'Tablero de ' + user?.displayName,
