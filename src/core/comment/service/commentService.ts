@@ -32,8 +32,6 @@ export const createUser = async (twitchId: string, display_name: string) => {
         },
         body: JSON.stringify({ twitch_id: twitchId, display_name })
     });
-    console.log(JSON.stringify(response));
-    if (!response.ok) throw new Error('Error creating user');
     const user = await response.json();
     return user;
 }

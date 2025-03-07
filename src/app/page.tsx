@@ -52,8 +52,8 @@ export default function Home() {
     <main className="max-w-screen-md mx-auto">
       <h1 className={`text-5xl font-black ${cabinet.className} mb-10`}>Crea tu propio tablero de <span className="text-purple-700">ideas</span></h1>
       {
-        (board !== undefined && board) ? <Link href={`/board/${user?.displayName} `}>Ir a mi tablero</Link> : (
-          user && <button onClick={handleCreateBoard} className="bg-purple-700 text-white p-2 rounded-md">Crear tablero</button>
+        (board !== undefined && board && user) ? <Link href={`/board/${user?.displayName} `}>Ir a mi tablero</Link> : (
+          user  && <button onClick={handleCreateBoard} className="bg-purple-700 text-white p-2 rounded-md">Crear tablero</button>
         )
       }
     </main>

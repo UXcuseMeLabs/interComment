@@ -24,6 +24,7 @@ export const useTwitch = ({ code }: IUserTwitch) => {
         cookies.remove("interComments");
         setIsLoggedIn(false);
         handleUser(null);
+        router.refresh()
     };
 
     const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID ?? "";
@@ -86,7 +87,6 @@ export const useTwitch = ({ code }: IUserTwitch) => {
                     await createUser(userId, user!.displayName);
                     setIsLoggedIn(true);
                     router.replace('/')
-                    router.refresh()
                 }   
             } catch (err) {
                 setError(err as Error);

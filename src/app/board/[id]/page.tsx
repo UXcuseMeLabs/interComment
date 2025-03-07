@@ -13,11 +13,12 @@ export const dynamic = "force-dynamic";
 export default async function BoardUser({params}: {params: Promise<{ id: string }>}) {
   const { id } = await params;
   const board = await getBoardByTwichId(id)
-  const palette = generatePaletteColors(board?.theme.color);
+  const palette = generatePaletteColors(board?.theme?.color);
 
-  //last word separated in array
+
   const lastWord = board?.name.split(' ').pop()
   const boardTitle = board?.name.replace(lastWord!, '');
+
 
   return (    <main className="max-w-screen-md mx-auto">
         <h1 className={`text-5xl  font-black ${cabinet.className} mb-10`}>{boardTitle} <span style={{color: palette[500]}}>{lastWord}</span></h1>
